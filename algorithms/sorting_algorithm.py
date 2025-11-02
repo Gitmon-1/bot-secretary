@@ -5,8 +5,8 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from algorithms.category import catalog, keywords
 
-
 categorized = {cat: [] for cat in keywords.keys()}
+
 
 async def sorting(data: dict, catalog):
     """"Алгоритм сортировки сообщений из не сортированого JSON file в сортированный"""
@@ -14,18 +14,16 @@ async def sorting(data: dict, catalog):
     for msg in data.get("messages", []):
         msg_lower = msg.lower()
         found = False
-#Алгоритм имеет несколько проблем. Первая: он итерируется до первого совпадения в ключевых словах. Хотя самих сообщений может быть несколько.
-#Во вторых объем файла и состояние не очищаются, а стоновятся только больше.
-    for k, v in keywords.items():
-        if any(word in msg_lower for word in k):
-                categorized[v].append(msg) #он добавляет не к категории, а к ключевому слову сообщение.
-                found = True
-                break #TODO
-        if not found:
-            return
+
+        for k, v in keywords.items():
+            if any(word in msg_lower for word in v): #если слово из ключевых слов есть в сообщении
+                    categorized[k].append(msg) #почкему добавляем по значению ключа, а не по ключу?
+                    found = True
+                    
+            if not found:
+                return
     return categorized
     
-
 
 async def save_to_json2(categorized: dict, filename: str = "sorting_messages.json"):
     """Beta version of message sorter хранителя"""
@@ -45,9 +43,9 @@ async def save_to_json2(categorized: dict, filename: str = "sorting_messages.jso
     # Объединяем старые и новые категории
     for category, messages in categorized.items():
         if category not in data:
-            data[category] = []  # создаём новую категорию, если её не было
+            data[category] = []  
         for msg in messages:
-            if msg not in data[category]:  # избегаем дублей
+            if msg not in data[category]:  
                 data[category].append(msg)
 
     # Сохраняем обратно в JSON
