@@ -2,9 +2,11 @@ import os
 import json
 import asyncio
 from algorithms.sorting_algorithm import sorting
-from algorithms.category import catalog
+from algorithms.category import keywords
 from algorithms.export import export_to_txt
-async def save_to_json(new_text: str, filename: str = "messages.json"):
+
+
+async def save_to_json(new_text: dict, filename: str = "messages.json"):
     if not os.path.exists(filename):
         with open(filename, "w", encoding="utf-8") as f:
             json.dump({"messages": []}, f, ensure_ascii=False, indent=4)
