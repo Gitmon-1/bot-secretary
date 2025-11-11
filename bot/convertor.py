@@ -15,7 +15,10 @@ async def save_to_json(new_text: dict, filename: str = "messages.json"):
         data = json.load(f)
     
     for k, v in new_text.items():
-        data[k].append(v)
+       if k not in data:
+            data[k] = []
+       data[k].append(v)
+
 
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
