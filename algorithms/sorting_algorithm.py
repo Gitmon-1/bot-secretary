@@ -23,7 +23,7 @@ async def sorting(data: dict, keywords):
                     found = True
                     
             if not found:
-                default_category[k].append(msg) #TODO
+                default_category["uncategorized"].append((k, msg)) #TODO
     return await save_to_json2(categorized)
     
 
