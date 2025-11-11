@@ -13,13 +13,14 @@ async def save_to_json(new_text: dict, filename: str = "messages.json"):
 
     with open(filename, "r", encoding="utf-8") as f:
         data = json.load(f)
-
-    data["messages"].append(new_text)
+    
+    for k, v in new_text.items():
+        data[k].append(v)
 
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-    return sorting(data, catalog)
+    return sorting(data, keywords=keywords)
 
 
 async def save_to_json2(categorized: dict, filename: str = "sorting_messages.json"):
