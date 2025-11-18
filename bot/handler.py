@@ -24,7 +24,7 @@ async def start_cmd(message: types.Message):
     await message.answer("Добро пожаловать!\nИспользуй /MENU чтобы добавить текст.")
 
 
-@router.message(Command("Add"))
+@router.message(Command("Добавить"))
 async def add_cmd(message: types.Message, state: FSMContext):
     await message.answer("✍️ Введите текст для добавления в конспект:")
     await state.set_state(AddText.waiting_for_text)
@@ -48,11 +48,11 @@ async def receive_keywords(message: types.Message, state: FSMContext):
     await state.clear()
 
 
-@router.message(Command("Show"))
+@router.message(Command("Поиск"))
 async def show_cmd(message: types.Message):
     pass
 
 
-@router.message(Command("Delete"))
+@router.message(Command("Удалить"))
 async def delete_cmd(message: types.Message):
     await delete(f"Сортирую {message.text}")
