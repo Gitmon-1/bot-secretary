@@ -16,7 +16,8 @@ router = Router()
 
 class AddText(StatesGroup):
     waiting_for_text = State()
-    waiting_for_keywords = State()
+    waiting_for_under_category = State()
+    waiting_for_under_category = State()
 
 
 @router.message(Command("start"))
@@ -34,17 +35,29 @@ async def add_cmd(message: types.Message, state: FSMContext):
 async def receive_text(message: types.Message, state: FSMContext):
     await state.update_data(user_text=message.text)
     await message.answer("🔑 Теперь введите ключевые слова:")
-    await state.set_state(AddText.waiting_for_keywords)
+    await state.set_state(AddText.waiting_for_under_category)
 
 
-@router.message(AddText.waiting_for_keywords)
+@router.message(AddText.waiting_for_under_category)
 async def receive_keywords(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user_text = data.get("user_text")
-    user_keywords = message.text
+    user_category = message.text
 
-    await save_to_json({"text": user_text, "keywords": user_keywords})
-    await message.answer(f"✅ Текст сохранён:\n{user_text}\n\n🔎 Ключевые слова:\n{user_keywords}")
+    await message.answer(f"✅ Текст сохранён:\n{user_text}\n\n🔎 Ключевые слова:\n{user_category}")
+    await state.clear()
+
+
+@router.message(AddText.waiting_for_under_category)
+async def receive_under_category(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    user_text = data.get("user_text")
+    user_category = data.get("user_category")
+    user_under_category = message.text
+    dict = {user_category: (user_under_category, user_text)}
+
+    await save_to_json({"text": user_text, "keywords": user_category, "under_category": user_under_category})
+    await message.answer(f"✅ Текст сохранён:\n{user_text}\n\n🔎 Ключевые слова:\n{user_category}\n\n📂 Подкатегория:\n{user_under_category}")
     await state.clear()
 
 
