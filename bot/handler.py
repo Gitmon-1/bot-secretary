@@ -44,7 +44,7 @@ async def receive_keywords(message: types.Message, state: FSMContext):
     user_text = data.get("user_text")
     user_category = message.text
 
-    await message.answer(f"✅ Текст сохранён:\n{user_text}\n\n🔎 Ключевые слова:\n{user_category}")
+    await message.answer(f"✅ Текст сохранён:\n{user_text}\n\n🔎 Категория\n{user_category}")
     await state.clear()
 
 
@@ -56,8 +56,8 @@ async def receive_under_category(message: types.Message, state: FSMContext):
     user_under_category = message.text
     dict = {user_category: (user_under_category, user_text)}
 
-    await save_to_json({"text": user_text, "keywords": user_category, "under_category": user_under_category})
-    await message.answer(f"✅ Текст сохранён:\n{user_text}\n\n🔎 Ключевые слова:\n{user_category}\n\n📂 Подкатегория:\n{user_under_category}")
+    await save_to_json(dict)
+    await message.answer(f"✅ Текст сохранён:\n{user_text}\n\n🔎 Категория:\n{user_category}\n\n📂 Подкатегория:\n{user_under_category}")
     await state.clear()
 
 
