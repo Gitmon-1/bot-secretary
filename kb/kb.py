@@ -11,6 +11,7 @@ main_menu_kb = ReplyKeyboardMarkup(
     input_field_placeholder='Выберите пункт меню...'
 )   
 
+
 # Добавить
 #   текст (заметка)
 #   категория
@@ -35,6 +36,7 @@ under_category_menu_kb = ReplyKeyboardMarkup(
     resize_keyboard=True,
     input_field_placeholder='Выберите пункт меню...'
 )
+
 # текст
 text_menu_kb = ReplyKeyboardMarkup(
     keyboard=[
@@ -44,11 +46,32 @@ text_menu_kb = ReplyKeyboardMarkup(
     input_field_placeholder='Выберите пункт меню...'
 )
 
+
 # Поиск
 #   по категорри
 #   по подкатегории
 
+search_menu_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text='По категории')], 
+        [KeyboardButton(text='По подкатегории')]
+    ],
+    resize_keyboard=True,
+    input_field_placeholder='Выберите пункт меню...'
+)
+
+
 # Удалить
+#   текст (заметка)
 #   категорию
 #   подкатегорию
-#   текст (заметка)
+
+delete_menu_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text='Текст')], 
+        [KeyboardButton(text='Категорию')],
+        [KeyboardButton(text='Подкатегорию')]
+    ],
+    resize_keyboard=True,
+    input_field_placeholder='Выберите пункт меню...'
+)
