@@ -6,6 +6,7 @@ from aiogram.fsm.state import FSMContext
 from kb import main_menu_keyboard, add_menu_kb, under_category_menu_kb, text_menu_kb, search_menu_kb, delete_menu_kb
 from handlers.handler import AddText
 
+
 delete_router = Router()
 
 

@@ -1,6 +1,6 @@
 from aiogram import Router, types
 from aiogram.filters import Command
-from algorithms.show_info import show
+from algorithms.find_info import show
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.state import FSMContext
 from convertor import save_to_json
