@@ -23,6 +23,7 @@ add_menu_kb = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text='Текст')], 
         [KeyboardButton(text='Категория')]
+        [KeyboardButton(text='Выйти в главное меню')]
     ],
     resize_keyboard=True,
     input_field_placeholder='Выберите пункт меню...'
@@ -32,6 +33,7 @@ add_menu_kb = ReplyKeyboardMarkup(
 under_category_menu_kb = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text='Подкатегория')]
+        [KeyboardButton(text='Выйти в главное меню')]
     ],
     resize_keyboard=True,
     input_field_placeholder='Выберите пункт меню...'
