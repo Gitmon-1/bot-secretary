@@ -1,7 +1,5 @@
 import asyncio
-import json
 from aiogram import Bot, Dispatcher, types
-from aiogram.filters.command import Command
 from token import TOKEN
 from handlers.handler import routers
 
@@ -14,5 +12,7 @@ async def main():
         dp.include_router(r)
 
     await dp.start_polling(bot)
+
+    
 if __name__ == "__main__":
     asyncio.run(main())
